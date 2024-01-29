@@ -1,12 +1,12 @@
 
 def linear_method(n):
-    val = n
+    current_value = n
     iterations = 0
-    while (val > 1):
-        if (val % 2):
-            val = 3 * val + 1
+    while (current_value > 1):
+        if (current_value % 2):
+            current_value = 3 * current_value + 1
         else:
-            val = val / 2
+            current_value = current_value / 2
 
         iterations+=1
 
@@ -20,6 +20,7 @@ def recursive_method(n):
             return 1 + recursive_method(3*n + 1)
         else:
             return 1 + recursive_method(n / 2)     
+
 
 iterations_dict = {}
 def cache_method(n):
