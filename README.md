@@ -29,7 +29,7 @@ To run all tests with simple time benchmarking run `test_all.sh` at the top leve
 ## Results
 
 ### Example results
-* Running on a Linux VM sitting on top of Window using an i7 CPU @ 2.40GHz 
+* Running on a Linux VM sitting on top of Windows with an i7 CPU @ 2.40GHz 
 * Calculating N = 1 - 2000, repeated 20 times
 
 Python
