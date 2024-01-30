@@ -38,3 +38,14 @@ time c/test.exe ${N_MAX} recursive ${REPETITIONS}
 echo ""
 echo "Cache:"
 time c/test.exe ${N_MAX} cache ${REPETITIONS}
+
+echo ""
+echo ""
+echo "**** JavaScript, calculating upto ${N_MAX} with ${REPETITIONS} repeats ****"
+
+echo "Linear:"
+time node javascript/test.js ${N_MAX} linear ${REPETITIONS}
+
+echo ""
+echo "Cache:"
+time node javascript/test.js ${N_MAX} cache ${REPETITIONS}
