@@ -10,7 +10,7 @@
 
 enum Algorithm {Linear, Recursive, Cache};
 
-int parseCommandLine_N(char* arg) {
+int parse_command_line_N(char* arg) {
     int value = atoi(arg);
     if (value < 1 || value > MAX_N) {
         printf("Value of N: %s is not valid\n", arg);
@@ -19,7 +19,7 @@ int parseCommandLine_N(char* arg) {
     return value;  
 }
 
-enum Algorithm parseCommandLine_Algo(char* arg) {
+enum Algorithm parse_command_line_Algo(char* arg) {
 
     enum Algorithm value; 
     if (!strcmp(arg, "linear")) {
@@ -39,55 +39,72 @@ enum Algorithm parseCommandLine_Algo(char* arg) {
 
 }
 
+int parse_command_line_Reps(char* arg) {
+    int value = atoi(arg);
+    if (value > 100) {
+        printf("Max 100 reps only");
+        exit(-1);
+    }
+    return value;
+
+
+}
+
 void main( int argc, char *argv[] )  {
 
-   int N;
+   int N, repetitions;
    enum Algorithm algorithm;
    int debug = FALSE;  
 
-   if( argc == 3 || argc == 4)  {
-      N = parseCommandLine_N(argv[1]);
-      algorithm = parseCommandLine_Algo(argv[2]);
+   if( argc == 4 || argc == 5)  {
+      N = parse_command_line_N(argv[1]);
+      algorithm = parse_command_line_Algo(argv[2]);
+      repetitions = parse_command_line_Reps(argv[3]);
 
-      if (argc == 4) {
+      if (argc == 5) {
         debug = TRUE;
       }
 
    }
    else {
-      printf("Run Collatz over given range with selected algorithm\n");
-      printf("usage: test.exe N {linear,recursive,cache} --debug\n");
+      printf("Run Collatz over given range with selected algorithm.  Can repeat 'repetition' times\n");
+      printf("usage: test.exe N {linear,recursive,cache} repetitions --debug\n");
       exit(0);
    }
 
    switch(algorithm) {
     case Linear: {
 
-        for (int n = 2; n <= N; n++) {
-            int result = linear_method(n);
-            if (debug) {
-                printf("%d %d\n", n, result);
+        for (int r = 0; r < repetitions; r++) {
+            for (int n = 2; n <= N; n++) {
+                int result = linear_method(n);
+                if (debug) {
+                    printf("%d %d\n", n, result);
+                }
             }
         }
         break;
     }
     case Recursive: {
 
-        for (int n = 2; n <= N; n++) {
-            int result = recursive_method(n);
-            if (debug) {
-                printf("%d %d\n", n, result);
+        for (int r = 0; r < repetitions; r++) {
+            for (int n = 2; n <= N; n++) {
+                int result = recursive_method(n);
+                if (debug) {
+                    printf("%d %d\n", n, result);
+                }
             }
         }
         break;
     }
     case Cache: {
 
-        cache_initialize();
-        for (int n = 2; n <= N; n++) {
-            int result = cache_method(n);
-            if (debug) {
-                printf("%d %d\n", n, result);
+        for (int r = 0; r < repetitions; r++) {
+            for (int n = 2; n <= N; n++) {
+                int result = cache_method(n);
+                if (debug) {
+                    printf("%d %d\n", n, result);
+                }
             }
         }
         break;

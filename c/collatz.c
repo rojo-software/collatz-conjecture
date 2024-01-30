@@ -1,3 +1,5 @@
+#include "cache.h"
+
 int linear_method(int n) {
     int current_value = n;
     int iterations = 0;
@@ -29,21 +31,19 @@ int recursive_method(int n) {
     }
 }
 
-#define MAX_N 250505 // define cache limit (see https://www.dcode.fr/collatz-conjecture)
-#define UNDEFINED -1 // provide a value so we know item is undefined
-static int iterations_cache[MAX_N];
-
-void cache_initialize(void) {
-    for (int i =0; i < MAX_N; i++)
-        iterations_cache[i] = UNDEFINED;
-}
+static int cache_initialised = 0;
 
 int cache_method(int n) {
-    
+
+    if (!cache_initialised) {
+        initialise_cache();
+        cache_initialised = 1;
+    }
+
     int current_value = n;
     int iterations = 0;
     while (current_value > 1) {
-        int cached_iterations = iterations_cache[current_value];
+        int cached_iterations = get_from_cache(current_value);
 
         if (cached_iterations != UNDEFINED) {
             iterations = iterations + cached_iterations;
@@ -62,6 +62,6 @@ int cache_method(int n) {
 
     }
 
-    iterations_cache[n] = iterations;
+    add_to_cache(n, iterations);
     return iterations;   
 }
