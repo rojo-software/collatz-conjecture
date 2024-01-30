@@ -5,7 +5,7 @@ There is a directory for each language:
 ```
 /python
 /c
-/javascript
+/javascript [TODO]
 ```
 
 To run all tests with simple time benchmarking, run `test_all.sh` at the top level
